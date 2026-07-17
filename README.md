@@ -4,7 +4,7 @@
 
 **「誰が・いつ読むか」でドキュメントの置き場を決める** — CLAUDE.md / エージェントメモリの肥大を止める7つの配達パターンと、再肥大を機械でブロックする予算ガード。
 
-> **EN**: Route every doc by *“who reads it, when.”* A pattern language (+ deterministic budget guards) that stops CLAUDE.md / agent-memory bloat. Measured result: **47KB → 10.8KB (−77%)** injected per session. Japanese README; tools are language-agnostic (Python stdlib only). **English pattern table**: [assets/routing-table-en.png](assets/routing-table-en.png) ([SVG](assets/routing-table-en.svg))
+> 🇬🇧 **English**: [README.en.md](README.en.md) — Route every doc by *“who reads it, when.”* Measured result: **47KB → 10.8KB (−77%)** injected per session.
 
 ## その CLAUDE.md、全員が毎回全部読んでいませんか
 
