@@ -1,0 +1,10 @@
+{
+  "budgets": {
+    "spec/STATE-LEDGER.md": 16000,
+    "spec/SESSION-DIGEST.md": 24000,
+    "spec/research-index.md": 30000
+  },
+  "row_limits": {
+    "spec/STATE-LEDGER.md": 600
+  }
+}
