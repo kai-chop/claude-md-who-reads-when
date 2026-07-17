@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" font-family="'Hiragino Sans','Noto Sans JP','Yu Gothic UI','Meiryo',sans-serif">
+  <defs>
+    <clipPath id="card"><rect x="8" y="8" width="964" height="604" rx="14"/></clipPath>
+  </defs>
+  <!-- card -->
+  <rect x="8" y="8" width="964" height="604" rx="14" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5"/>
+  <g clip-path="url(#card)">
+    <!-- title band -->
+    <rect x="8" y="8" width="964" height="70" fill="#111827"/>
+    <text x="32" y="38" font-size="21" font-weight="700" fill="#ffffff">誰が・いつ読むか で置き場を決める — ドキュメント配達の7パターン</text>
+    <text x="32" y="62" font-size="13" fill="#9ca3af">Route every doc by “who reads it, when” — the pattern table that stops CLAUDE.md bloat</text>
+
+    <!-- header row -->
+    <rect x="8" y="78" width="964" height="40" fill="#f3f4f6"/>
+    <text x="32"  y="104" font-size="14" font-weight="700" fill="#374151">パターン</text>
+    <text x="248" y="104" font-size="14" font-weight="700" fill="#374151">誰が・いつ読む</text>
+    <text x="460" y="104" font-size="14" font-weight="700" fill="#374151">正しい配達機構</text>
+    <text x="748" y="104" font-size="14" font-weight="700" fill="#374151">誤配置の症状</text>
+    <line x1="8" y1="118" x2="972" y2="118" stroke="#d0d7de"/>
+
+    <!-- rows: y start 118, each 70 -->
+    <!-- A -->
+    <g>
+      <rect x="24" y="132" width="30" height="30" rx="8" fill="#e11d48"/>
+      <text x="39" y="153" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">A</text>
+      <text x="64" y="146" font-size="14" font-weight="700" fill="#111827">行動核</text>
+      <text x="64" y="163" font-size="11" fill="#6b7280">Core rules</text>
+      <text x="248" y="150" font-size="13" fill="#111827">全員・毎回</text>
+      <text x="460" y="146" font-size="13" fill="#111827">CLAUDE.md 本体＋起動フック注入</text>
+      <text x="460" y="163" font-size="12" fill="#6b7280">（最小核だけを常時注入する）</text>
+      <text x="748" y="146" font-size="12.5" fill="#b91c1c">何でも CLAUDE.md へ追記</text>
+      <text x="748" y="163" font-size="12.5" fill="#b91c1c">→ 毎セッション全文課金</text>
+    </g>
+    <line x1="8" y1="188" x2="972" y2="188" stroke="#e5e7eb"/>
+    <!-- B -->
+    <g>
+      <rect x="24" y="202" width="30" height="30" rx="8" fill="#f59e0b"/>
+      <text x="39" y="223" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">B</text>
+      <text x="64" y="216" font-size="14" font-weight="700" fill="#111827">状況規範</text>
+      <text x="64" y="233" font-size="11" fill="#6b7280">Situational</text>
+      <text x="248" y="216" font-size="13" fill="#111827">着手・完了報告・障害対応</text>
+      <text x="248" y="233" font-size="13" fill="#111827">など状況の発生時</text>
+      <text x="460" y="216" font-size="13" fill="#111827">分岐参照表 → その時だけ Read</text>
+      <text x="460" y="233" font-size="12" fill="#6b7280">（要点だけ凝縮して注入に残す選択も）</text>
+      <text x="748" y="216" font-size="12.5" fill="#b91c1c">全文を常時注入ディレクトリに</text>
+      <text x="748" y="233" font-size="12.5" fill="#b91c1c">置く → 分岐表が形骸化</text>
+    </g>
+    <line x1="8" y1="258" x2="972" y2="258" stroke="#e5e7eb"/>
+    <!-- C -->
+    <g>
+      <rect x="24" y="272" width="30" height="30" rx="8" fill="#10b981"/>
+      <text x="39" y="293" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">C</text>
+      <text x="64" y="286" font-size="14" font-weight="700" fill="#111827">パス規範</text>
+      <text x="64" y="303" font-size="11" fill="#6b7280">Path-scoped</text>
+      <text x="248" y="290" font-size="13" fill="#111827">特定パスを編集する時</text>
+      <text x="460" y="286" font-size="13" fill="#111827">rules の frontmatter `paths:` で</text>
+      <text x="460" y="303" font-size="13" fill="#111827">該当編集時のみ自動注入</text>
+      <text x="748" y="286" font-size="12.5" fill="#b91c1c">全域ルールに混ぜる →</text>
+      <text x="748" y="303" font-size="12.5" fill="#b91c1c">無関係な作業でも毎回読む</text>
+    </g>
+    <line x1="8" y1="328" x2="972" y2="328" stroke="#e5e7eb"/>
+    <!-- D -->
+    <g>
+      <rect x="24" y="342" width="30" height="30" rx="8" fill="#3b82f6"/>
+      <text x="39" y="363" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">D</text>
+      <text x="64" y="356" font-size="14" font-weight="700" fill="#111827">役割規範</text>
+      <text x="64" y="373" font-size="11" fill="#6b7280">Role-scoped</text>
+      <text x="248" y="360" font-size="13" fill="#111827">その agent / skill の起動時</text>
+      <text x="460" y="356" font-size="13" fill="#111827">description は自動列挙・</text>
+      <text x="460" y="373" font-size="13" fill="#111827">詳細は body（起動時のみ課金）</text>
+      <text x="748" y="356" font-size="12.5" fill="#b91c1c">body の内容を CLAUDE.md に</text>
+      <text x="748" y="373" font-size="12.5" fill="#b91c1c">再掲 → 二重管理でズレる</text>
+    </g>
+    <line x1="8" y1="398" x2="972" y2="398" stroke="#e5e7eb"/>
+    <!-- E -->
+    <g>
+      <rect x="24" y="412" width="30" height="30" rx="8" fill="#8b5cf6"/>
+      <text x="39" y="433" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">E</text>
+      <text x="64" y="426" font-size="14" font-weight="700" fill="#111827">台帳・ログ</text>
+      <text x="64" y="443" font-size="11" fill="#6b7280">Ledgers / logs</text>
+      <text x="248" y="426" font-size="13" fill="#111827">機械が読み書き・</text>
+      <text x="248" y="443" font-size="13" fill="#111827">人は監査/障害対応時のみ</text>
+      <text x="460" y="426" font-size="13" fill="#111827">注入されない置き場（ledgers/ 等）</text>
+      <text x="460" y="443" font-size="12" fill="#6b7280">スクリプトがパスで直接読む</text>
+      <text x="748" y="426" font-size="12.5" fill="#b91c1c">rules/ に置く → 監査ログ</text>
+      <text x="748" y="443" font-size="12.5" fill="#b91c1c">28KB が毎セッション注入税</text>
+    </g>
+    <line x1="8" y1="468" x2="972" y2="468" stroke="#e5e7eb"/>
+    <!-- F -->
+    <g>
+      <rect x="24" y="482" width="30" height="30" rx="8" fill="#ec4899"/>
+      <text x="39" y="503" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">F</text>
+      <text x="64" y="496" font-size="14" font-weight="700" fill="#111827">現在地</text>
+      <text x="64" y="513" font-size="11" fill="#6b7280">Live state</text>
+      <text x="248" y="500" font-size="13" fill="#111827">セッション開始時</text>
+      <text x="460" y="496" font-size="13" fill="#111827">薄い盤面だけ（状態＋次の一手＋</text>
+      <text x="460" y="513" font-size="13" fill="#111827">詳細へのポインタ）</text>
+      <text x="748" y="496" font-size="12.5" fill="#b91c1c">状態行に仕様詳細が漏出</text>
+      <text x="748" y="513" font-size="12.5" fill="#b91c1c">→ 1行 7,370字・46KB の実害</text>
+    </g>
+    <line x1="8" y1="538" x2="972" y2="538" stroke="#e5e7eb"/>
+    <!-- G -->
+    <g>
+      <rect x="24" y="552" width="30" height="30" rx="8" fill="#14b8a6"/>
+      <text x="39" y="573" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">G</text>
+      <text x="64" y="566" font-size="14" font-weight="700" fill="#111827">ドメイン詳細</text>
+      <text x="64" y="583" font-size="11" fill="#6b7280">Domain detail</text>
+      <text x="248" y="570" font-size="13" fill="#111827">その領域に着手する時のみ</text>
+      <text x="460" y="566" font-size="13" fill="#111827">領域別ファイル＋索引の該当節だけ</text>
+      <text x="460" y="583" font-size="12" fill="#6b7280">読む（全文読み禁止を索引に明記）</text>
+      <text x="748" y="566" font-size="12.5" fill="#b91c1c">時系列に全ドメイン混在で堆積</text>
+      <text x="748" y="583" font-size="12.5" fill="#b91c1c">→ 無関係な過去も毎回読む</text>
+    </g>
+  </g>
+</svg>
