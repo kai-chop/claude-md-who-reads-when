@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <!-- background -->
+  <rect width="1280" height="640" fill="#0f172a"/>
+  <rect x="0" y="0" width="1280" height="6" fill="#38bdf8"/>
+
+  <!-- eyebrow -->
+  <text x="64" y="78" font-size="17" font-weight="700" letter-spacing="3" fill="#38bdf8">CONTEXT ENGINEERING · FOR CODING AGENTS</text>
+
+  <!-- title -->
+  <text x="64" y="150" font-size="50" font-weight="800" fill="#f8fafc">Route every doc by</text>
+  <text x="64" y="212" font-size="50" font-weight="800" fill="#38bdf8">&#8220;who reads it, when.&#8221;</text>
+
+  <!-- subtitle -->
+  <text x="64" y="258" font-size="21" fill="#94a3b8">7 delivery patterns + budget guards that stop</text>
+  <text x="64" y="286" font-size="21" fill="#94a3b8">CLAUDE.md / agent-memory bloat.</text>
+
+  <!-- stat panel -->
+  <rect x="838" y="52" width="378" height="234" rx="16" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="864" y="96" font-size="14" font-weight="700" letter-spacing="1.5" fill="#94a3b8">ALWAYS-INJECTED MEMORY / SESSION</text>
+  <text x="864" y="146" font-size="34" font-weight="600" fill="#64748b">47 KB</text>
+  <line x1="864" y1="136" x2="972" y2="136" stroke="#64748b" stroke-width="2.5"/>
+  <text x="864" y="218" font-size="62" font-weight="800" fill="#34d399">10.8 KB</text>
+  <text x="864" y="256" font-size="20" font-weight="700" fill="#34d399">&#8722;77%</text>
+  <text x="930" y="256" font-size="18" fill="#94a3b8">per session, zero info lost</text>
+
+  <!-- A-G chip strip -->
+  <g font-weight="700" text-anchor="middle">
+    <!-- A -->
+    <rect x="64"  y="360" width="154" height="76" rx="12" fill="#e11d48"/>
+    <text x="141" y="396" font-size="24" fill="#ffffff">A</text>
+    <text x="141" y="420" font-size="13" fill="#ffffff" font-weight="600">Core</text>
+    <!-- B -->
+    <rect x="230" y="360" width="154" height="76" rx="12" fill="#f59e0b"/>
+    <text x="307" y="396" font-size="24" fill="#ffffff">B</text>
+    <text x="307" y="420" font-size="13" fill="#ffffff" font-weight="600">Situational</text>
+    <!-- C -->
+    <rect x="396" y="360" width="154" height="76" rx="12" fill="#10b981"/>
+    <text x="473" y="396" font-size="24" fill="#ffffff">C</text>
+    <text x="473" y="420" font-size="13" fill="#ffffff" font-weight="600">Path-scoped</text>
+    <!-- D -->
+    <rect x="562" y="360" width="154" height="76" rx="12" fill="#3b82f6"/>
+    <text x="639" y="396" font-size="24" fill="#ffffff">D</text>
+    <text x="639" y="420" font-size="13" fill="#ffffff" font-weight="600">Role-scoped</text>
+    <!-- E -->
+    <rect x="728" y="360" width="154" height="76" rx="12" fill="#8b5cf6"/>
+    <text x="805" y="396" font-size="24" fill="#ffffff">E</text>
+    <text x="805" y="420" font-size="13" fill="#ffffff" font-weight="600">Ledgers &amp; logs</text>
+    <!-- F -->
+    <rect x="894" y="360" width="154" height="76" rx="12" fill="#ec4899"/>
+    <text x="971" y="396" font-size="24" fill="#ffffff">F</text>
+    <text x="971" y="420" font-size="13" fill="#ffffff" font-weight="600">Live state</text>
+    <!-- G -->
+    <rect x="1060" y="360" width="156" height="76" rx="12" fill="#14b8a6"/>
+    <text x="1138" y="396" font-size="24" fill="#ffffff">G</text>
+    <text x="1138" y="420" font-size="13" fill="#ffffff" font-weight="600">Domain detail</text>
+  </g>
+
+  <!-- caption under chips -->
+  <text x="64" y="480" font-size="17" fill="#64748b">Each pattern has a reader and a time. Deliver it there — not in the file everyone reads every session.</text>
+
+  <!-- divider -->
+  <line x1="64" y1="556" x2="1216" y2="556" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- footer -->
+  <text x="64" y="598" font-size="20" font-weight="700" fill="#e2e8f0">github.com/kai-chop/claude-md-who-reads-when</text>
+  <text x="1216" y="598" font-size="18" text-anchor="end" fill="#64748b">MIT · self-tested on Linux / macOS / Windows</text>
+</svg>
