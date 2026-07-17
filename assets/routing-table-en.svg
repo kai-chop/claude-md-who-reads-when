@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+  <defs>
+    <clipPath id="card"><rect x="8" y="8" width="964" height="604" rx="14"/></clipPath>
+  </defs>
+  <!-- card -->
+  <rect x="8" y="8" width="964" height="604" rx="14" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5"/>
+  <g clip-path="url(#card)">
+    <!-- title band -->
+    <rect x="8" y="8" width="964" height="70" fill="#111827"/>
+    <text x="32" y="38" font-size="21" font-weight="700" fill="#ffffff">Route every doc by “who reads it, when” — 7 delivery patterns</text>
+    <text x="32" y="62" font-size="13" fill="#9ca3af">The pattern table that stops CLAUDE.md / agent-memory bloat（誰が・いつ読むかで置き場を決める）</text>
+
+    <!-- header row -->
+    <rect x="8" y="78" width="964" height="40" fill="#f3f4f6"/>
+    <text x="32"  y="104" font-size="14" font-weight="700" fill="#374151">Pattern</text>
+    <text x="248" y="104" font-size="14" font-weight="700" fill="#374151">Who reads it, when</text>
+    <text x="460" y="104" font-size="14" font-weight="700" fill="#374151">Right delivery channel</text>
+    <text x="748" y="104" font-size="14" font-weight="700" fill="#374151">Misplacement symptom</text>
+    <line x1="8" y1="118" x2="972" y2="118" stroke="#d0d7de"/>
+
+    <!-- rows: start 118, each 70 -->
+    <!-- A -->
+    <g>
+      <rect x="24" y="132" width="30" height="30" rx="8" fill="#e11d48"/>
+      <text x="39" y="153" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">A</text>
+      <text x="64" y="146" font-size="14" font-weight="700" fill="#111827">Core rules</text>
+      <text x="64" y="163" font-size="11" fill="#6b7280">行動核</text>
+      <text x="248" y="150" font-size="13" fill="#111827">Everyone, every session</text>
+      <text x="460" y="146" font-size="13" fill="#111827">CLAUDE.md itself + startup-hook injection</text>
+      <text x="460" y="163" font-size="12" fill="#6b7280">(keep only the minimal core always-on)</text>
+      <text x="748" y="146" font-size="12.5" fill="#b91c1c">Everything appended to CLAUDE.md</text>
+      <text x="748" y="163" font-size="12.5" fill="#b91c1c">→ full re-read billed every session</text>
+    </g>
+    <line x1="8" y1="188" x2="972" y2="188" stroke="#e5e7eb"/>
+    <!-- B -->
+    <g>
+      <rect x="24" y="202" width="30" height="30" rx="8" fill="#f59e0b"/>
+      <text x="39" y="223" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">B</text>
+      <text x="64" y="216" font-size="14" font-weight="700" fill="#111827">Situational rules</text>
+      <text x="64" y="233" font-size="11" fill="#6b7280">状況規範</text>
+      <text x="248" y="216" font-size="13" fill="#111827">When a situation occurs: start,</text>
+      <text x="248" y="233" font-size="13" fill="#111827">done-report, incident, handoff</text>
+      <text x="460" y="216" font-size="13" fill="#111827">Branch table → Read only at that moment</text>
+      <text x="460" y="233" font-size="12" fill="#6b7280">(or keep a condensed core injected)</text>
+      <text x="748" y="216" font-size="12.5" fill="#b91c1c">Full text in an always-injected dir</text>
+      <text x="748" y="233" font-size="12.5" fill="#b91c1c">→ the branch table turns decorative</text>
+    </g>
+    <line x1="8" y1="258" x2="972" y2="258" stroke="#e5e7eb"/>
+    <!-- C -->
+    <g>
+      <rect x="24" y="272" width="30" height="30" rx="8" fill="#10b981"/>
+      <text x="39" y="293" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">C</text>
+      <text x="64" y="286" font-size="14" font-weight="700" fill="#111827">Path-scoped rules</text>
+      <text x="64" y="303" font-size="11" fill="#6b7280">パス規範</text>
+      <text x="248" y="286" font-size="13" fill="#111827">When editing files under</text>
+      <text x="248" y="303" font-size="13" fill="#111827">a specific path</text>
+      <text x="460" y="286" font-size="13" fill="#111827">rules frontmatter `paths:` — injected</text>
+      <text x="460" y="303" font-size="13" fill="#111827">only on matching edits</text>
+      <text x="748" y="286" font-size="12.5" fill="#b91c1c">Mixed into global rules → read on</text>
+      <text x="748" y="303" font-size="12.5" fill="#b91c1c">every unrelated task</text>
+    </g>
+    <line x1="8" y1="328" x2="972" y2="328" stroke="#e5e7eb"/>
+    <!-- D -->
+    <g>
+      <rect x="24" y="342" width="30" height="30" rx="8" fill="#3b82f6"/>
+      <text x="39" y="363" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">D</text>
+      <text x="64" y="356" font-size="14" font-weight="700" fill="#111827">Role-scoped rules</text>
+      <text x="64" y="373" font-size="11" fill="#6b7280">役割規範</text>
+      <text x="248" y="356" font-size="13" fill="#111827">Only when that agent / skill</text>
+      <text x="248" y="373" font-size="13" fill="#111827">is launched</text>
+      <text x="460" y="356" font-size="13" fill="#111827">`description:` is auto-listed (the index);</text>
+      <text x="460" y="373" font-size="13" fill="#111827">details live in the body — billed on launch</text>
+      <text x="748" y="356" font-size="12.5" fill="#b91c1c">Body restated in CLAUDE.md</text>
+      <text x="748" y="373" font-size="12.5" fill="#b91c1c">→ double bookkeeping drifts</text>
+    </g>
+    <line x1="8" y1="398" x2="972" y2="398" stroke="#e5e7eb"/>
+    <!-- E -->
+    <g>
+      <rect x="24" y="412" width="30" height="30" rx="8" fill="#8b5cf6"/>
+      <text x="39" y="433" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">E</text>
+      <text x="64" y="426" font-size="14" font-weight="700" fill="#111827">Ledgers &amp; logs</text>
+      <text x="64" y="443" font-size="11" fill="#6b7280">台帳・ログ</text>
+      <text x="248" y="426" font-size="13" fill="#111827">Scripts read/write; humans only</text>
+      <text x="248" y="443" font-size="13" fill="#111827">at audit / incident time</text>
+      <text x="460" y="426" font-size="13" fill="#111827">A non-injected directory (e.g. ledgers/)</text>
+      <text x="460" y="443" font-size="12" fill="#6b7280">tools read it directly by path</text>
+      <text x="748" y="426" font-size="12.5" fill="#b91c1c">Kept in rules/ → 28KB of audit logs</text>
+      <text x="748" y="443" font-size="12.5" fill="#b91c1c">injected every single session</text>
+    </g>
+    <line x1="8" y1="468" x2="972" y2="468" stroke="#e5e7eb"/>
+    <!-- F -->
+    <g>
+      <rect x="24" y="482" width="30" height="30" rx="8" fill="#ec4899"/>
+      <text x="39" y="503" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">F</text>
+      <text x="64" y="496" font-size="14" font-weight="700" fill="#111827">Live state</text>
+      <text x="64" y="513" font-size="11" fill="#6b7280">現在地</text>
+      <text x="248" y="500" font-size="13" fill="#111827">At session start</text>
+      <text x="460" y="496" font-size="13" fill="#111827">A thin board only: status + next step</text>
+      <text x="460" y="513" font-size="13" fill="#111827">+ pointers to detail</text>
+      <text x="748" y="496" font-size="12.5" fill="#b91c1c">Spec detail leaks into status rows</text>
+      <text x="748" y="513" font-size="12.5" fill="#b91c1c">→ 7,370 chars in one row, 46KB file</text>
+    </g>
+    <line x1="8" y1="538" x2="972" y2="538" stroke="#e5e7eb"/>
+    <!-- G -->
+    <g>
+      <rect x="24" y="552" width="30" height="30" rx="8" fill="#14b8a6"/>
+      <text x="39" y="573" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">G</text>
+      <text x="64" y="566" font-size="14" font-weight="700" fill="#111827">Domain detail</text>
+      <text x="64" y="583" font-size="11" fill="#6b7280">ドメイン詳細</text>
+      <text x="248" y="566" font-size="13" fill="#111827">Only when working</text>
+      <text x="248" y="583" font-size="13" fill="#111827">in that domain</text>
+      <text x="460" y="566" font-size="13" fill="#111827">Per-domain files + read only the relevant</text>
+      <text x="460" y="583" font-size="13" fill="#111827">index section (no full read — say so)</text>
+      <text x="748" y="566" font-size="12.5" fill="#b91c1c">One mixed chronicle piles up →</text>
+      <text x="748" y="583" font-size="12.5" fill="#b91c1c">unrelated history read every time</text>
+    </g>
+  </g>
+</svg>
