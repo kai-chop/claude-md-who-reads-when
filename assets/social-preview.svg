@@ -21,7 +21,7 @@
   <line x1="864" y1="136" x2="972" y2="136" stroke="#64748b" stroke-width="2.5"/>
   <text x="864" y="218" font-size="62" font-weight="800" fill="#34d399">10.8 KB</text>
   <text x="864" y="256" font-size="20" font-weight="700" fill="#34d399">&#8722;77%</text>
-  <text x="930" y="256" font-size="18" fill="#94a3b8">per session, zero info lost</text>
+  <text x="930" y="256" font-size="18" fill="#94a3b8">zero info lost · 2026-07</text>
 
   <!-- A-H chip strip -->
   <g font-weight="700" text-anchor="middle">

@@ -68,6 +68,7 @@ Every one of these is the same single class of problem: **information whose read
 - **Delivery**: `~/.claude/projects/<cwd-slug>/memory/`. Only the one-line index `MEMORY.md` is always injected; each memory's body is read when the model decides it needs it (measured: 4.6KB index injected, 55KB of bodies across 24 files not injected). **Never write something the rules already say** — keep one canonical source
 - **Misplacement symptom**: **wrong drawer.** The drawer is chosen deterministically by cwd, but nothing chooses it *at save time* — it just lands in whichever session you were in. That produces ①**duplication** (copies of the same rule pile up in another drawer, dead weight in both directions) and ②**starvation** (the cwd that actually needs it can't read it) at once. Measured: 5 unrelated memories landed in one project's drawer and blew its injection budget, while another drawer held 16 duplicates of the same rules
 - **Ask before saving**: “**which working directory will use this again?**” If it isn't this one, write it to that project's `memory/`
+- **Machine layer**: that question is a *reminder*, which contradicts this document's own principle (reminders eventually break). In practice it was pushed down to **a hook that prompts a non-blocking drawer check when a memory is written**. **No second detector was added** — the injection-budget audit already measures the denominator (total index size), and reaching for a second detector on the same problem is a sign you're at the wrong layer. The hook itself is environment-specific, so it isn't shipped here
 
 ## Three operating rules
 
@@ -76,6 +77,8 @@ Every one of these is the same single class of problem: **information whose read
 3. **After detection, the next thing to add is not a second detector — it's automating the relocation.** Even with per-section ratchets in place, the digest measurably **sat at 99.2% of budget**. Detection was sufficient; what was missing was that *moving* was still manual. Countermeasure strength runs **eliminate > observe > detect > remind** — reaching for a second detector on the same problem is a sign you're at the wrong layer.
 
 ## Tools (Python stdlib only, self-tests included)
+
+> These are a **generalized snapshot** of tools in daily use (project-specific paths and naming lifted into arguments). The originals keep evolving in their own environment, so this isn't kept continuously in sync — treat it as **the shape at a point in time**.
 
 ### 1. `tools/check_doc_budget.py` — document budget guard
 
