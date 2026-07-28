@@ -19,3 +19,7 @@ jobs:
         run: python tools/check_doc_budget.py --self-test
       - name: check_md_routing self-test
         run: python tools/check_md_routing.py --self-test
+      - name: rotate_digest self-test
+        run: python tools/rotate_digest.py --self-test
+      - name: rotate_ledger self-test
+        run: python tools/rotate_ledger.py --self-test

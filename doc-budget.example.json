@@ -1,4 +1,5 @@
 {
+  "warn_ratio": 0.95,
   "budgets": {
     "spec/STATE-LEDGER.md": 16000,
     "spec/SESSION-DIGEST.md": 24000,
@@ -6,5 +7,20 @@
   },
   "row_limits": {
     "spec/STATE-LEDGER.md": 600
+  },
+  "section_rules": {
+    "spec/SESSION-DIGEST.md": {
+      "heading": "^## 20\\d\\d-",
+      "max_sections": 4,
+      "max_section_bytes": 3000
+    },
+    "spec/research-index.md": {
+      "heading": "^## ",
+      "max_section_bytes": 1000,
+      "baseline": {
+        "4.11": 1383,
+        "4.15": 1419
+      }
+    }
   }
 }

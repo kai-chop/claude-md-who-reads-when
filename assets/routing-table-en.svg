@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="690" viewBox="0 0 980 690" font-family="'Segoe UI','Helvetica Neue',Arial,sans-serif">
   <defs>
-    <clipPath id="card"><rect x="8" y="8" width="964" height="604" rx="14"/></clipPath>
+    <clipPath id="card"><rect x="8" y="8" width="964" height="674" rx="14"/></clipPath>
   </defs>
   <!-- card -->
-  <rect x="8" y="8" width="964" height="604" rx="14" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5"/>
+  <rect x="8" y="8" width="964" height="674" rx="14" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5"/>
   <g clip-path="url(#card)">
     <!-- title band -->
     <rect x="8" y="8" width="964" height="70" fill="#111827"/>
-    <text x="32" y="38" font-size="21" font-weight="700" fill="#ffffff">Route every doc by “who reads it, when” — 7 delivery patterns</text>
+    <text x="32" y="38" font-size="21" font-weight="700" fill="#ffffff">Route every doc by “who reads it, when” — 8 delivery patterns</text>
     <text x="32" y="62" font-size="13" fill="#9ca3af">The pattern table that stops CLAUDE.md / agent-memory bloat（誰が・いつ読むかで置き場を決める）</text>
 
     <!-- header row -->
@@ -113,6 +113,20 @@
       <text x="460" y="583" font-size="13" fill="#111827">index section (no full read — say so)</text>
       <text x="748" y="566" font-size="12.5" fill="#b91c1c">One mixed chronicle piles up →</text>
       <text x="748" y="583" font-size="12.5" fill="#b91c1c">unrelated history read every time</text>
+    </g>
+    <line x1="8" y1="608" x2="972" y2="608" stroke="#e5e7eb"/>
+    <!-- H -->
+    <g>
+      <rect x="24" y="622" width="30" height="30" rx="8" fill="#0ea5e9"/>
+      <text x="39" y="643" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">H</text>
+      <text x="64" y="636" font-size="14" font-weight="700" fill="#111827">Memory drawers</text>
+      <text x="64" y="653" font-size="11" fill="#6b7280">記憶（引き出し）</text>
+      <text x="248" y="636" font-size="13" fill="#111827">Only that cwd's sessions</text>
+      <text x="248" y="653" font-size="12" fill="#6b7280">(index always, body on recall)</text>
+      <text x="460" y="636" font-size="13" fill="#111827">projects/&lt;cwd&gt;/memory/ — only the index</text>
+      <text x="460" y="653" font-size="12" fill="#6b7280">is injected (4.6KB in, 55KB of bodies out)</text>
+      <text x="748" y="636" font-size="12.5" fill="#b91c1c">Wrong drawer → duplicates pile up</text>
+      <text x="748" y="653" font-size="12.5" fill="#b91c1c">where the real cwd can't read them</text>
     </g>
   </g>
 </svg>

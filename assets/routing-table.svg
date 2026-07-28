@@ -1,13 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" font-family="'Hiragino Sans','Noto Sans JP','Yu Gothic UI','Meiryo',sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="690" viewBox="0 0 980 690" font-family="'Hiragino Sans','Noto Sans JP','Yu Gothic UI','Meiryo',sans-serif">
   <defs>
-    <clipPath id="card"><rect x="8" y="8" width="964" height="604" rx="14"/></clipPath>
+    <clipPath id="card"><rect x="8" y="8" width="964" height="674" rx="14"/></clipPath>
   </defs>
   <!-- card -->
-  <rect x="8" y="8" width="964" height="604" rx="14" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5"/>
+  <rect x="8" y="8" width="964" height="674" rx="14" fill="#ffffff" stroke="#d0d7de" stroke-width="1.5"/>
   <g clip-path="url(#card)">
     <!-- title band -->
     <rect x="8" y="8" width="964" height="70" fill="#111827"/>
-    <text x="32" y="38" font-size="21" font-weight="700" fill="#ffffff">誰が・いつ読むか で置き場を決める — ドキュメント配達の7パターン</text>
+    <text x="32" y="38" font-size="21" font-weight="700" fill="#ffffff">誰が・いつ読むか で置き場を決める — ドキュメント配達の8パターン</text>
     <text x="32" y="62" font-size="13" fill="#9ca3af">Route every doc by “who reads it, when” — the pattern table that stops CLAUDE.md bloat</text>
 
     <!-- header row -->
@@ -110,6 +110,20 @@
       <text x="460" y="583" font-size="12" fill="#6b7280">読む（全文読み禁止を索引に明記）</text>
       <text x="748" y="566" font-size="12.5" fill="#b91c1c">時系列に全ドメイン混在で堆積</text>
       <text x="748" y="583" font-size="12.5" fill="#b91c1c">→ 無関係な過去も毎回読む</text>
+    </g>
+    <line x1="8" y1="608" x2="972" y2="608" stroke="#e5e7eb"/>
+    <!-- H -->
+    <g>
+      <rect x="24" y="622" width="30" height="30" rx="8" fill="#0ea5e9"/>
+      <text x="39" y="643" font-size="16" font-weight="700" fill="#fff" text-anchor="middle">H</text>
+      <text x="64" y="636" font-size="14" font-weight="700" fill="#111827">記憶</text>
+      <text x="64" y="653" font-size="11" fill="#6b7280">Memory drawers</text>
+      <text x="248" y="636" font-size="13" fill="#111827">その作業ディレクトリのみ</text>
+      <text x="248" y="653" font-size="12" fill="#6b7280">（索引=毎回・本文=想起時）</text>
+      <text x="460" y="636" font-size="13" fill="#111827">projects/&lt;cwd&gt;/memory/ の索引だけ</text>
+      <text x="460" y="653" font-size="12" fill="#6b7280">注入（実測 索引4.6KB / 本文55KB外）</text>
+      <text x="748" y="636" font-size="12.5" fill="#b91c1c">引き出し違い → 別cwdに複製が</text>
+      <text x="748" y="653" font-size="12.5" fill="#b91c1c">溜まり、使う側から読めない</text>
     </g>
   </g>
 </svg>
