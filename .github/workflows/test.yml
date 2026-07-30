@@ -23,3 +23,7 @@ jobs:
         run: python tools/rotate_digest.py --self-test
       - name: rotate_ledger self-test
         run: python tools/rotate_ledger.py --self-test
+      - name: measure_doc_reads compiles and shows help
+        run: |
+          python -m py_compile tools/measure_doc_reads.py
+          python tools/measure_doc_reads.py --help

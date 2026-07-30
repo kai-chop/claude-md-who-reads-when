@@ -2,11 +2,13 @@
   "warn_ratio": 0.95,
   "budgets": {
     "spec/STATE-LEDGER.md": 16000,
-    "spec/SESSION-DIGEST.md": 24000,
-    "spec/research-index.md": 30000
+    "spec/SESSION-DIGEST.md": 24000
   },
   "row_limits": {
-    "spec/STATE-LEDGER.md": 600
+    "spec/STATE-LEDGER.md": 350
+  },
+  "item_limits": {
+    "CLAUDE.md": 18
   },
   "section_rules": {
     "spec/SESSION-DIGEST.md": {

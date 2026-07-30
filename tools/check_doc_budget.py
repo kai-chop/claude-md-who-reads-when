@@ -19,6 +19,10 @@
 }
 - budgets:    ファイルごとのバイト予算（超過で exit 1）
 - row_limits: mdテーブル行（`|` 始まり）の1行の字数上限（仕様漏出の防止線）
+- item_limits: 常駐docの「箇条書きの件数」上限（2026-07-31）。バイトでなく**競合する指示の
+  本数**を止める＝守りたいのはトークン費用でなく推論品質（指示が増えるほど個々が希釈される）。
+  バイト予算は文章を削る圧力にしかならず、実測では常駐mdが予算内(27%)のまま50件まで増えた。
+  超過時に問うのは「縮めよ」でなく「どれを辞書/機械配達へ出すか」。
 - warn_ratio: 予算に対する早期警告の閾値（既定 0.85）。「超過」でなく「接近」で鳴らす
 - section_rules: 節単位ratchet。heading 正規表現に合う `## ` 節を対象に、
   節数上限(max_sections)と節バイト上限(max_section_bytes)を検査。節の終端=次の任意の `^## ` 行。
@@ -50,10 +54,13 @@ WARN_RATIO_DEFAULT = 0.85
 
 def load_config(path):
     cfg = json.loads(Path(path).read_text(encoding="utf-8"))
+    # item_limits は**末尾**に追加（2026-07-31）。中央挿入は rotate_digest 等の
+    # 位置indexアクセス（[3]=section_rules）を黙って壊す——実際に self-test で壊した。
     return (cfg.get("budgets", {}),
             cfg.get("row_limits", {}),
             float(cfg.get("warn_ratio", WARN_RATIO_DEFAULT)),
-            cfg.get("section_rules", {}))
+            cfg.get("section_rules", {}),
+            cfg.get("item_limits", {}))
 
 
 def split_sections(text, heading_pat):
@@ -127,8 +134,9 @@ def near_limit(root, budgets, warn_ratio):
     return out
 
 
-def check(root, budgets, row_limits):
+def check(root, budgets, row_limits, item_limits=None):
     """予算違反のリストを返す（空=合格）。設定に書かれたファイルの不在は警告扱いで返す。"""
+    item_limits = item_limits or {}
     problems = []
     for rel, limit in budgets.items():
         p = root / rel
@@ -147,6 +155,18 @@ def check(root, budgets, row_limits):
                 problems.append(
                     f"{rel}:{i}: 行{len(line)}字 > {limit}字（詳細の漏出疑い）"
                     f" → 原文をarchiveへ移送し「状態+次の一手+ポインタ」へ: {line[:40]}…")
+    # item_limits: バイトでなく「箇条書きの件数」＝競合する指示の本数を止める（docstring参照）
+    for rel, limit in item_limits.items():
+        p = root / rel
+        if not p.is_file():
+            continue
+        n = sum(1 for l in p.read_text(encoding="utf-8").splitlines()
+                if l.strip().startswith("- "))
+        if n > limit:
+            problems.append(
+                f"{rel}: 常駐項目 {n}件 > 上限{limit}件 → 縮めるのではなく"
+                "「発火の瞬間があるものは機械配達(rules/フック/skill)へ、"
+                "理由・手順・出典は辞書(索引つきspec)へ」出せ")
     return problems
 
 
@@ -165,6 +185,18 @@ def self_test():
         ]
         for label, budgets, rows, should_fire in cases:
             fired = bool(check(root, budgets, rows))
+            good = fired == should_fire
+            ok &= good
+            print(f"  [{'PASS' if good else '** FAIL **'}] {label}: 発火={fired} (期待={should_fire})")
+
+        # item_limits（件数ゲート）: 箇条書き3件のフィクスチャで上下両方向
+        (root / "core.md").write_text("# t\n- a\n- b\n- c\n本文\n", encoding="utf-8")
+        item_cases = [
+            ("件数=上限内=非発火", {"core.md": 3}, False),
+            ("件数超過=発火", {"core.md": 2}, True),
+        ]
+        for label, items, should_fire in item_cases:
+            fired = bool(check(root, {}, {}, items))
             good = fired == should_fire
             ok &= good
             print(f"  [{'PASS' if good else '** FAIL **'}] {label}: 発火={fired} (期待={should_fire})")
@@ -243,8 +275,8 @@ def main():
     if not cfg_path.is_file():
         print(f"設定なし: {cfg_path} を作成してください（README参照）")
         return 1
-    budgets, row_limits, warn_ratio, section_rules = load_config(cfg_path)
-    problems = check(args.root, budgets, row_limits)
+    budgets, row_limits, warn_ratio, section_rules, item_limits = load_config(cfg_path)
+    problems = check(args.root, budgets, row_limits, item_limits)
     sec_problems, sec_advices = check_sections(args.root, section_rules)
     problems += sec_problems
     if problems:

@@ -31,6 +31,7 @@ Every one of these is the same single class of problem: **information whose read
 - **Who, when**: when a situation occurs — starting work, reporting done, incident response, handoff
 - **Delivery**: a branch table in CLAUDE.md (situation → file), Read only at that moment. For rules that must reach weaker models reliably, **keep a condensed core injected** (don't branch everything). The line drawn in practice: thinking / quality / workflow rules stay injected; ledgers (E) are the ones moved behind the branch table
 - **Misplacement symptom**: full text kept in an always-injected directory → the branch table turns decorative while the tax stays
+- **⚠ Measured warning (2026-07-31, 64 sessions)**: branch tables **barely work**. Reads routed through the table hit 0–5% cover (a 6.9KB quality-rules file: **zero reads**; the largest 17.9KB rulebook: 5%), losing decisively to machine delivery (hooks / path-scoping) at 16%. **What decides usage is the delivery mechanism, not the content's importance.** For rules that must land: ① inject only the ones with *no firing moment* (A); ② anything with a firing moment goes to hooks / path-scoping (C). Treat the branch table as a roster — never design as if it delivers
 
 <a id="pattern-c"></a>
 ### C. Path-scoped rules `#path-scoped`
@@ -76,6 +77,15 @@ Every one of these is the same single class of problem: **information whose read
 2. **Enforce budgets by machine, not by reminder.** “Be careful about bloat” always breaks eventually. Run budget guards in pre-commit (below).
 3. **After detection, the next thing to add is not a second detector — it's automating the relocation.** Even with per-section ratchets in place, the digest measurably **sat at 99.2% of budget**. Detection was sufficient; what was missing was that *moving* was still manual. Countermeasure strength runs **eliminate > observe > detect > remind** — reaching for a second detector on the same problem is a sign you're at the wrong layer.
 
+## Where budgets stop working (2026-07-31, second pass on the same environment)
+
+What a year of byte budgets taught us about their limits — and what replaces them.
+
+1. **Bytes are a proxy.** What you're protecting is not token cost but **reasoning quality**, and dilution scales with the **number of competing instructions**. Measured: an always-injected md grew to **50 bullet items while sitting at 27% of its byte budget** — bytes never fired. The fix is `item_limits` (a count gate). A byte budget only pressures you to *shorten prose*; a count pressures you to **choose what leaves** (a dense line and a bloated line both count as one).
+2. **Split the discipline: dictionary vs. resident.** Accumulated expertise (specs, research, failure taxonomies, the *reasons* behind rules) is **treasure you can't predict the need for** — keeping it costs almost nothing, re-researching it costs a lot. So the dictionary's job is **not trimming, but building the retrieval path for the moment you need it**: every file in an index, findable not by filename but by **"when to reach for this"** — the question you'd be holding when you open it (e.g. "props sinking behind the mat" → the render-order research). Hold 100% coverage in pre-commit; measured, 22 of 79 files (~360KB) were **in no index at all — they existed, but the only way to reach them was a lucky grep**. Treasure you can't retrieve is treasure you don't have. Strict reduction applies **only to resident docs**. Applying the same compression discipline to both is the mistake — we caught ourselves compressing a rules file that had **zero reads in 64 sessions** just to fit its budget: trimming canonical text to satisfy a number nobody reads.
+3. **The real symptom is not "over budget" — it's "doesn't land in one read."** Our session-start ledger was being re-read 3.1×/session; re-opening an orientation doc three times means it didn't fit the first time, and the budget overrun was merely its proxy. Measure the fix (rows cut to *status + next step + pointer*) by the **drop in re-reads**, not bytes (tool 4 below).
+4. **Move, don't fold.** Summarizing stale rows into a reservation table recovered almost nothing (the content just transfers). What worked: **relocating whole bundles that share one wake condition** to their own file (e.g. nine "check next time the game runs" items → a dedicated checklist; the ledger keeps one pointer row. Self-draining files — items deleted on PASS — don't even need a budget).
+
 ## Tools (Python stdlib only, self-tests included)
 
 > These are a **generalized snapshot** of tools in daily use (project-specific paths and naming lifted into arguments). The originals keep evolving in their own environment, so this isn't kept continuously in sync — treat it as **the shape at a point in time**.
@@ -88,7 +98,8 @@ Put `doc-budget.json` at the repo root (every key shown in [`doc-budget.example.
 {
   "warn_ratio": 0.95,
   "budgets":    { "spec/STATE-LEDGER.md": 16000, "spec/SESSION-DIGEST.md": 24000 },
-  "row_limits": { "spec/STATE-LEDGER.md": 600 },
+  "row_limits": { "spec/STATE-LEDGER.md": 350 },
+  "item_limits": { "CLAUDE.md": 18 },
   "section_rules": {
     "spec/SESSION-DIGEST.md": { "heading": "^## 20\\d\\d-", "max_sections": 4,
                                 "max_section_bytes": 3000 },
@@ -99,6 +110,7 @@ Put `doc-budget.json` at the repo root (every key shown in [`doc-budget.example.
 ```
 
 - **`budgets` / `row_limits`** — byte budget per file, and a character cap for a single markdown table row (the tripwire for spec leakage).
+- **`item_limits`** — a cap on the **number of bullet items** in resident mds (see "Where budgets stop working" #1). Derive the cap from **the actual count when written to spec, plus headroom** — not a round number. On overflow the advice is not "shorten" but "choose what moves to machine delivery / the dictionary."
 - **`warn_ratio`** — early warning on **approach**, not just overflow (default 0.85). A guard that only fires on overflow still prints PASS at 96.9%, so the only way to notice is for a human to remember — i.e. it degrades back into a reminder (this happened). Set it too low and several files warn on every commit until nobody reads them, so put it **one step above where your files normally sit**.
 - **`section_rules` (per-section ratchet)** — a whole-file cap alone turns into whack-a-mole (“warn → hand-trim a bit”). These stop the growth structure itself.
   - `max_sections` … cap on the **number** of dated sections — mechanically enforces “rotate as soon as it's finished,” so steady-state size is bounded by work in progress.
@@ -143,6 +155,19 @@ $ python tools/rotate_ledger.py --rows 51 --apply  # move the named ledger rows,
 - **Invariants**: (a) before deleting anything, **re-read the archive from disk** to confirm the verbatim copy landed; if a line is missing, **abort without touching the source file** (stopping beats losing data). (b) surviving lines are not modified by a single character — not even trailing-whitespace normalization.
 - **Filenames carry a machine tag** (default: normalized hostname). Two machines rotating on the same day would otherwise write different content to the same path and collide add/add on pull (this happened). Making the *naming* mechanical means the collision can't occur — elimination, not detection.
 
+### 4. `tools/measure_doc_reads.py` — the observation layer: which mds are actually read
+
+Parses Claude Code session logs (`~/.claude/projects/<slug>/*.jsonl` plus the per-session subagent subdirectories) and reports, per md: **cover** (share of sessions with ≥1 read), **first** (position of the first read within the session), **re** (re-reads per reading session). This sits *above* budgets in the countermeasure hierarchy — **observe before you re-route**.
+
+```console
+$ python tools/measure_doc_reads.py --slug <name under ~/.claude/projects/>
+$ python tools/measure_doc_reads.py --slug ... --since 2026-07-31   # don't mix pre/post-edit sessions
+```
+
+- **`re` flips meaning by role** — high re-reads on a per-task spec are healthy (back-and-forth while implementing). **High re-reads on a session-start doc (first≈0%) are the pathology**: it didn't land in one read.
+- **`--since`** — when testing a hypothesis like "thinner rows → fewer re-reads," mixing pre-edit sessions confounds the result. Measure only after the edit date.
+- **Unread is not evidence.** Other machines' logs are absent, grep references aren't recorded, and missing the subagent subdirectories silently drops delegated reads (our first version did — and produced a false "46 files never read"). **Only the read-side numbers are trustworthy**; never delete a doc because it looks unread (dictionaries are keep-everything).
+
 ## Measured effect (all patterns applied to one real project, 2026-07-17)
 
 | Target | Before | After |
@@ -170,12 +195,26 @@ What this shows:
 - **But files grow to fill the budget.** 88–92% is the resting band, because a budget becomes the de facto target. So the thing to add after a total-size guard is not a tighter total — it's **per-section ratchets plus automated relocation** (operating rule 3). The digest went from sitting at 99.2% back down to 88% once rotation was actually run.
 - The +5.3KB on the global side is newly added behavioral rules, and it now sits under a separate machine audit (**7KB per file / 26KB total** injection budget). One file is at 96% of its cap — which is exactly the signal that the next addition has to be condensed or branched.
 
+## Second-pass redesign (2026-07-31, same environment, measured from the observation layer)
+
+That injection budget (7KB/file, 26KB total) **was later retired**. Read-measurement (tool 4) showed the `rules/` files were never actually injected — linked, budgeted, and **opened zero times in 64 sessions** — so the cost the budget guarded didn't exist (reclassified as dictionary; see "Where budgets stop working" #2). The resident side moved to count gates at the same time.
+
+| Target | Before | After | Lever |
+|---|---|---|---|
+| Resident project md | **50 bullets** / 18.9KB | **15 bullets** / 5.9KB | Keep only rules with *no firing moment*; rest to machine delivery / dictionary (**zero loss**, machine-verified over 51 marker terms) |
+| Progress ledger | 95.9% (saturating weekly) | **56.8%** | Relocation, not compression (9 on-device checks moved out; details to their owning specs) |
+| Total per-session injection | 44.8KB | **32.0KB** | Sum of the above |
+| Dictionary (79 spec files) | 67% index coverage | **100%** | "When to reach for this" line added per file + coverage gate in pre-commit |
+
+If the first pass taught "enforce budgets by machine," the second pass teaches "**before budgeting, measure who reads what, when**." Byte budgets remain — demoted to backstop.
+
 ## FAQ
 
 - **Q. Why not make everything on-demand and inject nothing?** — Behavioral rules (B) require the model to actually perform the “Read it then” step. Keep the core that must never break injected, and take **only lookups (E) to zero injection**.
 - **Q. Doesn't relocating lose history?** — The opposite. Originals go to `archive/` verbatim, so grep returns the exact row as it was. That preserves more than prose “summaries” do.
 - **Q. Won't files just grow to fill whatever budget I set?** — Yes (88–92% above). A budget guarantees *bounded*, not *minimal*. If you want closer to minimal, tightening the total is the weaker move — **per-section caps plus rotate-on-completion** works better, because it stops the growth structure rather than the symptom.
 - **Q. Does this apply outside Claude Code?** — The pattern table works for any agent with an always-loaded memory file (AGENTS.md, .cursorrules, …). The tools just inspect markdown, so they port as-is.
+- **Q. What about a doc that has a budget and links, yet nobody reads it?** — That's a third state — neither resident nor dictionary: linked, budgeted, never opened. Compressing it to fit its budget is the worst move (readership stays zero; only the canon gets thinner). Fix the address first: ① if it truly must be resident, move it into injection / hook delivery and cut it hard; ② if the dictionary suffices, drop the budget and index it. The read-measurement tool (4) is how you decide.
 
 ## Tags
 
