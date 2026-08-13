@@ -6,6 +6,8 @@
 
 > 🇯🇵 日本語版: [README.md](README.md)
 
+> 👀 **Sister repo (pattern I)**: [claude-md-generated-views](https://github.com/kai-chop/claude-md-generated-views) — don't *write* overviews in md, *generate* them: single-file HTML for humans, json/md for the AI, with freshness guards. Adopt both and overview tables leave your md economy entirely.
+
 ## Is everyone reading your entire CLAUDE.md, every time?
 
 Claude Code injects `CLAUDE.md` and `~/.claude/rules/*.md` **in full, every session**. Keep appending “just one more rule” and you end up with a structure where **you're building a voice mod but still re-reading your 3D-modeling history every day**. Measured on a real project:

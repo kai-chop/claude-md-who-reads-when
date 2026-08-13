@@ -6,6 +6,8 @@
 
 > 🇬🇧 **English**: [README.en.md](README.en.md) — Route every doc by *“who reads it, when.”* Measured result: **47KB → 10.8KB (−77%)** injected per session.
 
+> 👀 **姉妹リポ（パターンI）**: [claude-md-generated-views](https://github.com/kai-chop/claude-md-generated-views) — 一覧・俯瞰・タイムラインは md に**書かず生成する**。人=単一ファイルHTML／AI=json・md の二面契約＋鮮度ガード。併用すると俯瞰表が md 経済から丸ごと退場し、予算管理がさらに軽くなる。
+
 ## その CLAUDE.md、全員が毎回全部読んでいませんか
 
 Claude Code は `CLAUDE.md` と `~/.claude/rules/*.md` を**毎セッション全文注入**します。つまり「とりあえずルールに追記」を続けると、**voice modを作っている日も3D制作の実績を読まされる**構造になります。実測では:
