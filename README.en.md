@@ -18,7 +18,7 @@ Claude Code injects `CLAUDE.md` and `~/.claude/rules/*.md` **in full, every sess
 
 Every one of these is the same single class of problem: **information whose reader and timing differ, piled into the same place.**
 
-## The prescription: 8 delivery patterns (A–H)
+## The prescription: 8 delivery patterns (A–H; pattern I lives in the sister repo)
 
 ![Route every doc by who reads it, when — 8 delivery patterns](assets/routing-table-en.svg)
 
@@ -71,6 +71,7 @@ Every one of these is the same single class of problem: **information whose read
 - **Delivery**: `~/.claude/projects/<cwd-slug>/memory/`. Only the one-line index `MEMORY.md` is always injected; each memory's body is read when the model decides it needs it (measured: 4.6KB index injected, 55KB of bodies across 24 files not injected). **Never write something the rules already say** — keep one canonical source
 - **Misplacement symptom**: **wrong drawer.** The drawer is chosen deterministically by cwd, but nothing chooses it *at save time* — it just lands in whichever session you were in. That produces ①**duplication** (copies of the same rule pile up in another drawer, dead weight in both directions) and ②**starvation** (the cwd that actually needs it can't read it) at once. Measured: 5 unrelated memories landed in one project's drawer and blew its injection budget, while another drawer held 16 duplicates of the same rules
 - **Ask before saving**: “**which working directory will use this again?**” If it isn't this one, write it to that project's `memory/`
+- **Index lines carry verdicts only (added 2026-08-13, measured)**: since only the index is always injected, each line keeps the **one sentence that decides behavior** (the verdict); rationale, history and how-to live in the body files. Let index lines accrete explanations and H becomes your next bloat frontier (measured: an index grew to 13.5KB and became the budget's main driver → merging sibling memories + verdict-only trimming brought it to **11.98KB (−11%)** with zero fact loss, machine-checked in both directions). The dividing line is not headline/content but **verdict/rationale** — verdicts like “settled, do not relitigate” must stay resident, or the decision to open the file never fires
 - **Machine layer**: that question is a *reminder*, which contradicts this document's own principle (reminders eventually break). In practice it was pushed down to **a hook that prompts a non-blocking drawer check when a memory is written**. **No second detector was added** — the injection-budget audit already measures the denominator (total index size), and reaching for a second detector on the same problem is a sign you're at the wrong layer. The hook itself is environment-specific, so it isn't shipped here
 
 ## Three operating rules
